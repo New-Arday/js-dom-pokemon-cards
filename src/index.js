@@ -37,7 +37,7 @@ data.forEach(function (pokemon) {
     cardetails.append(innerLi);
 
     innerLi.innerText = `${stat.stat.name.toUpperCase()}: ${stat.base_stat}`;
-    document.querySelector(".card--text").style.lineHeight = "30px";
+    // document.querySelector(".card--text").style.lineHeight = "30px";
   });
 });
 console.log(data[0]);
