@@ -4,14 +4,17 @@ console.log(data);
 //pokemon card from the first element
 
 data.forEach(function (pokemon) {
-  // console.log("pokemonName", pokemon.name);
   const card1 = document.querySelector(".cards");
   const li = document.createElement("li");
   card1.append(li);
 
   li.setAttribute("class", "card");
   const nameTitle = document.createElement("h2");
-  nameTitle.innerText = pokemon.name;
+
+  let firstLetter =
+    pokemon.name[0].toUpperCase() + pokemon.name.substring(1, 9);
+
+  nameTitle.innerText = firstLetter;
   nameTitle.setAttribute("class", "card--title");
   li.append(nameTitle);
 
@@ -20,14 +23,21 @@ data.forEach(function (pokemon) {
   li.append(image);
   image.setAttribute("width", "256");
   image.setAttribute("class", "card--img");
-  image.setAttribute("src", pokemon.sprites.back_default);
+  image.setAttribute(
+    "src",
+    pokemon.sprites.other["official-artwork"].front_default
+  );
 
-  const ul = document.createElement("ul");
-  li.append(ul);
-  ul.setAttribute("class", "card--text");
+  const cardetails = document.createElement("ul");
+  li.append(cardetails);
+  cardetails.setAttribute("class", "card--text");
 
-  const innerLi = document.createElement("li");
-  ul.append(innerLi);
-  innerLi.innerText = pokemon.stats;
+  pokemon.stats.forEach(function (stat) {
+    const innerLi = document.createElement("li");
+    cardetails.append(innerLi);
+
+    innerLi.innerText = `${stat.stat.name.toUpperCase()}: ${stat.base_stat}`;
+    document.querySelector(".card--text").style.lineHeight = "30px";
+  });
 });
 console.log(data[0]);
